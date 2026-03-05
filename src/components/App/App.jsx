@@ -72,16 +72,6 @@ function App() {
     }
   }
 
-  // Close the active modal when clicking on the overlay (outside the modal borders)
-  const allModals = document.querySelectorAll(".modal");
-  allModals.forEach((modal) => {
-    modal.addEventListener("click", (evt) => {
-      if (evt.target.classList.contains("modal")) {
-        handleCloseModal(evt);
-      }
-    });
-  });
-
   // When opening modal form, clear previous cancelled input, hide previous error messages, make sure button state is correct
   function handleOpenNewItemForm() {
     const newItemForm = document.forms["new-item"];

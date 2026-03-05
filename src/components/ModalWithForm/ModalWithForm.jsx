@@ -18,10 +18,18 @@ function ModalWithForm({
     }
   }, [isOpen]);
 
+  function handleModalClick(evt) {
+    // Close the active modal when clicking on the overlay (outside the modal borders)
+    if (evt.target.classList.contains("modal")) {
+      onClose(evt);
+    }
+  }
+
   return (
     <div
       className={`modal ${isOpen ? "modal_is-opened" : ""} modal_type_${name}`}
       id={`${name}-modal`}
+      onClick={handleModalClick}
     >
       <div className="modal__container">
         <button
