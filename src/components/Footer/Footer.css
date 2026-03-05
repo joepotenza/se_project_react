@@ -7,10 +7,11 @@
   font-size: 16px;
   line-height: 20px;
   letter-spacing: 0%;
-  vertical-align: bottom;
+  margin: 171px auto 0 auto;
+  padding-bottom: 24px;
+  height: 20px;
 }
 
 .footer__developer,
 .footer__copyright {
-  margin: auto 0 24px 0;
 }

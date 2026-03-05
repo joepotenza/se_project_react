@@ -1,0 +1,96 @@
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal__title {
+  margin: 0 0 24px 0;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal__label {
+  display: block;
+  margin: 0 0 24px;
+  border-bottom: 1px solid #000;
+}
+
+.modal__label:hover,
+.modal__input:hover {
+  cursor: pointer;
+}
+
+.modal__input {
+  display: block;
+  border: none;
+  padding: 0 0 4px 0;
+  margin: 8px 0 0 0;
+  width: calc(100%);
+}
+
+.modal__input:hover {
+  /* border: 1px solid rgba(33, 33, 33, 1);*/
+}
+
+.modal__input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__input_has-error {
+  /*border: 1px solid rgba(255, 0, 0, 1);*/
+}
+
+.modal__error {
+  display: none;
+  color: rgba(255, 77, 0, 1);
+  border-bottom: 1px solid rgba(255, 77, 0, 1);
+  margin-top: 8px;
+}
+
+.modal__error-x {
+  display: block;
+}
+
+.modal__submit-btn {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 100%;
+  width: 124px;
+  height: 36px;
+}
+
+.modal__submit-btn:hover {
+  opacity: 0.6;
+}
+
+.modal__submit-btn_disabled,
+.modal__submit-btn_disabled:hover {
+  opacity: 0.3;
+}
+
+.modal__radio-buttons {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.modal__legend {
+  font-family: "CabinetGroteskBold";
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0 0 12px;
+}
+.modal__label_type_radio {
+  margin-bottom: 8px;
+  color: rgba(0, 0, 0, 0.5);
+  border: 0;
+}
+
+.modal__label_type_radio_checked {
+  color: rgba(0, 0, 0, 1);
+}

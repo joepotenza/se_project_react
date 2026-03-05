@@ -1,0 +1,8 @@
+.modal__container_type_item-detail {
+  padding: 0;
+  border-radius: 16px;
+}
+.modal__close-btn_type_item-detail {
+  top: 24px;
+  right: 24px;
+}

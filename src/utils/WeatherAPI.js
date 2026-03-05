@@ -1,3 +1,6 @@
+/*
+  API for openweathermap.org
+*/
 export default class WeatherAPI {
   constructor({ key, lat, long }) {
     this._key = key;
@@ -7,16 +10,26 @@ export default class WeatherAPI {
   }
 
   getWeatherType(id) {
+    /*
+    2xx: Thunderstorm
+    3xx: Drizzle, 5xx: Rain
+    6xx: Snow
+    7xx: Atmosphere
+    800: Clear
+    801-804: Cloudy
+     */
     if (id < 200) return "N/A";
-    if (id < 300) return "storm";
-    if (id < 600) return "rain";
+    if (id >= 200 && id < 300) return "storm";
+    if ((id >= 300 && id < 400) || (id >= 500 && id < 600)) return "rain";
     if (id < 700) return "snow";
-    if (id === 741) return "fog";
+    if (id < 800) return "fog";
     if (id === 800 || id === 801) return "clear";
     if (id < 805) return "cloudy";
     return "N/A";
   }
 
+  // Get simplified "weather condition" type
+  // Possible future addition: Allow for these numbers to change based on location
   getWeatherCondition(temperature) {
     if (temperature > 86) {
       return "hot";
@@ -45,13 +58,13 @@ export default class WeatherAPI {
     const type = this.getWeatherType(data.weather[0].id);
     // The api includes an icon that specifies day or night so use that to set the day/night flag
     const isDay = data.weather[0].icon[data.weather[0].icon.length - 1] === "d";
-    const temp = parseInt(data.main.temp);
+    const temp = Math.round(data.main.temp);
     return {
       city: data.name,
       temp: temp,
       condition: this.getWeatherCondition(temp),
       type: type,
-      day: isDay,
+      isDay: isDay,
     };
   }
 }

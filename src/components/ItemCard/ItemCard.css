@@ -1,0 +1,29 @@
+.card {
+  border-color: rgba(0, 0, 0, 0.3);
+  border-width: 1px;
+  border-radius: 19px;
+  background-color: rgba(233, 233, 233, 1);
+  width: 323px;
+  height: 328px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.card__name {
+  position: absolute;
+  top: 15px;
+  padding: 2px 12px;
+  margin: 0;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  font-family: "CabinetGroteskBold";
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.card__image {
+  width: 100%;
+}

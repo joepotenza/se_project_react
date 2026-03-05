@@ -1,7 +1,19 @@
-.main__subtext {
+.cards {
+}
+
+.cards__suggestion {
   font-family: "CabinetGroteskBold";
   font-size: 20px;
   line-height: 100%;
   letter-spacing: 0%;
-  margin: 40px 0 0 0;
+  margin: 40px 0 34px 0;
+}
+
+.cards__list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 21px;
+  margin: 0;
+  padding: 0;
 }
