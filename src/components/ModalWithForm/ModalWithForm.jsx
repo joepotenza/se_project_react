@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./ModalWithForm.css";
 
 function ModalWithForm({
@@ -7,8 +8,16 @@ function ModalWithForm({
   isOpen,
   onClose,
   onSubmit,
+  onOpen,
   children,
 }) {
+  // Allow for a handler to execute when the modal is opened (for form validation)
+  useEffect(() => {
+    if (isOpen && onOpen) {
+      onOpen();
+    }
+  }, [isOpen]);
+
   return (
     <div
       className={`modal ${isOpen ? "modal_is-opened" : ""} modal_type_${name}`}

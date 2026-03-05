@@ -5,6 +5,7 @@ function ItemCard({ item, onClick }) {
     <li className="card" onClick={onClick}>
       <h2 className="card__name">{item.name}</h2>
       <img className="card__image" src={item.link} alt={item.name} />
+      <span className="card__weather">{item.weather}</span>
     </li>
   );
 }

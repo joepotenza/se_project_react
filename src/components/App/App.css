@@ -59,3 +59,13 @@
 .modal__close-btn:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 630px) {
+  .page__content {
+    padding: 0 16px;
+  }
+  .modal {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

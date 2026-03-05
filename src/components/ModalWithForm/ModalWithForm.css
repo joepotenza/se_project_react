@@ -44,10 +44,10 @@
   display: none;
   color: rgba(255, 77, 0, 1);
   border-bottom: 1px solid rgba(255, 77, 0, 1);
-  margin-top: 8px;
+  margin: -4px 0 20px 0;
 }
 
-.modal__error-x {
+.modal__error_has-error {
   display: block;
 }
 
@@ -62,6 +62,10 @@
   line-height: 100%;
   width: 124px;
   height: 36px;
+  margin-top: 24px;
+  font-family: "CabinetGroteskBold";
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .modal__submit-btn:hover {
@@ -85,12 +89,26 @@
   line-height: 20px;
   margin: 0 0 12px;
 }
-.modal__label_type_radio {
+
+.modal__radio-button {
+  display: flex;
+  gap: 8px;
+  height: 20px;
   margin-bottom: 8px;
+}
+
+.modal__label_type_radio {
   color: rgba(0, 0, 0, 0.5);
   border: 0;
 }
 
-.modal__label_type_radio_checked {
+.modal__radio-input:checked + label {
   color: rgba(0, 0, 0, 1);
+}
+
+@media screen and (max-width: 630px) {
+  .modal__submit-btn {
+    width: 343px;
+    height: 44px;
+  }
 }

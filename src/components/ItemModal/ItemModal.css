@@ -1,8 +1,65 @@
 .modal__container_type_item-detail {
   padding: 0;
   border-radius: 16px;
+  width: 498px;
+  height: 610px;
 }
 .modal__close-btn_type_item-detail {
   top: 24px;
   right: 24px;
+  background: transparent url(../../images/close_icon_black.svg) center
+    no-repeat;
+}
+
+.modal__item-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal__image {
+  width: 498px;
+  height: 498px;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.modal__item-details {
+  margin: 0 0 32px 32px;
+}
+
+.modal__card-name {
+  padding: 8px 0 0 0;
+  margin: 0;
+  font-family: "CabinetGroteskBold";
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.modal__item-text {
+  font-family: "CabinetGroteskBold";
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 12px;
+}
+
+@media screen and (max-width: 630px) {
+  .modal__container_type_item-detail {
+    padding: 0;
+    border-radius: 12px;
+    width: 343px;
+    height: 463px;
+  }
+  .modal__close-btn_type_item-detail {
+    top: 12px;
+    right: 12px;
+  }
+  .modal__image {
+    width: 343px;
+    height: 343px;
+    border-radius: 12px 12px 0 0;
+  }
+  .modal__item-details {
+    margin: 0 0 40px 20px;
+  }
 }

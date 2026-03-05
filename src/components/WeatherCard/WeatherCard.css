@@ -4,6 +4,7 @@
   height: 80px;
   border-radius: 12px;
   overflow: hidden;
+  margin-bottom: 40px;
 }
 .weather__temperature {
   font-family: "CabinetGroteskBold";
@@ -23,4 +24,9 @@
   object-fit: cover;
   width: 100%;
   object-position: right top;
+}
+@media screen and (max-width: 630px) {
+  .weather {
+    margin-bottom: 32px;
+  }
 }

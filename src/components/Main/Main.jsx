@@ -2,15 +2,18 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
 
-function Main({ weatherData, clothingItems, clickItemHandler }) {
+function Main({
+  weatherData,
+  clothingItems,
+  clickItemHandler,
+  isMobileMenuOpened,
+}) {
   return (
     <main className="main">
-      <WeatherCard weatherData={weatherData} />
+      {isMobileMenuOpened ? <></> : <WeatherCard weatherData={weatherData} />}
       <section className="cards">
         <p className="cards__suggestion">
-          {weatherData.temp === 999
-            ? ""
-            : `Today is ${weatherData.temp} ° F / You may want to wear:`}
+          Today is {weatherData.temp}&deg; F / You may want to wear:
         </p>
         <ul className="cards__list">
           {clothingItems

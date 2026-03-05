@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+
 import {
   defaultClothingItems,
   weatherAPIConfig,
   weatherConditions,
 } from "../../utils/constants.js";
+
+import {
+  enableValidation,
+  toggleButtonState,
+  hideInputError,
+  checkInputValidity,
+  validationSettings,
+} from "../../utils/validation.js";
+
 import WeatherAPI from "../../utils/WeatherAPI.js";
 const weatherAPI = new WeatherAPI(weatherAPIConfig);
 
@@ -24,7 +34,12 @@ function App() {
   });
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState("");
+  const [selectedCard, setSelectedCard] = useState({
+    image: "",
+    title: "",
+    weather: "",
+  });
+  const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
 
   // Handler to display "new garment" modal
   function handleOpenModalWithForm(evt) {
@@ -34,8 +49,12 @@ function App() {
 
   // Handler to display "item detail" modal
   function handleOpenItemModal(evt) {
-    console.log("handleOpenItemModal");
     setActiveModal("item-detail");
+    const card = evt.target.closest(".card");
+    const image = card.querySelector(".card__image").src;
+    const title = card.querySelector(".card__name").textContent;
+    const weather = `Weather: ${card.querySelector(".card__weather").textContent}`;
+    setSelectedCard({ image, title, weather });
     document.addEventListener("keydown", closeModalWithEscapeKey);
   }
 
@@ -62,6 +81,47 @@ function App() {
     });
   });
 
+  // When opening modal form, clear previous cancelled input, hide previous error messages, make sure button state is correct
+  function handleOpenNewItemForm() {
+    const newItemForm = document.forms["new-item"];
+    const newItemName = newItemForm.querySelector("#item-name");
+    const newItemImage = newItemForm.querySelector("#item-image");
+    const newItemSubmitBtn = newItemForm.querySelector(".modal__submit-btn");
+    const inputList = [newItemName, newItemImage];
+
+    newItemForm.reset();
+
+    inputList.forEach((inputElement) => {
+      const errorElement = newItemForm.querySelector(
+        `#${inputElement.id}-error`,
+      );
+      hideInputError(
+        inputElement,
+        errorElement,
+        validationSettings.errorClass,
+        validationSettings.errorElementClass,
+      );
+    });
+    toggleButtonState(
+      inputList,
+      newItemSubmitBtn,
+      validationSettings.inactiveButtonClass,
+    );
+  }
+
+  // Quietly clear new item form on submit - form processing TBD in future Sprint
+  function handleNewItemSubmit(evt) {
+    evt.preventDefault();
+    const newItemForm = document.forms["new-item"];
+    newItemForm.reset();
+    handleCloseModal(evt);
+  }
+
+  // Track opening/closing mobile menu, since WeatherCard is located in Main and not Header
+  function handleToggleMobileMenu(isOpen) {
+    setIsMobileMenuOpened(isOpen);
+  }
+
   useEffect(() => {
     //When rendering, fetch the weather data
     weatherAPI
@@ -83,6 +143,8 @@ function App() {
         setWeatherData(newData);
       })
       .catch(console.error);
+
+    enableValidation(validationSettings);
   }, []);
 
   return (
@@ -91,11 +153,13 @@ function App() {
         <Header
           weatherData={weatherData}
           openModalHandler={handleOpenModalWithForm}
+          mobileMenuHandler={handleToggleMobileMenu}
         />
         <Main
           weatherData={weatherData}
           clothingItems={clothingItems}
           clickItemHandler={handleOpenItemModal}
+          isMobileMenuOpened={isMobileMenuOpened}
         />
         <Footer />
         <ModalWithForm
@@ -103,7 +167,9 @@ function App() {
           title="New garment"
           buttonText="Add garment"
           isOpen={activeModal === "new-item"}
+          onOpen={handleOpenNewItemForm}
           onClose={handleCloseModal}
+          onSubmit={handleNewItemSubmit}
         >
           <label htmlFor="item-name" className="modal__label">
             Name
@@ -129,43 +195,49 @@ function App() {
           <span className="modal__error" id="item-image-error"></span>
           <fieldset className="modal__radio-buttons">
             <legend className="modal__legend">Select the weather type:</legend>
-            <label
-              htmlFor="item-radio-hot"
-              className="modal__label modal__label_type_radio modal__label_type_radio_checked"
-            >
+            <div className="modal__radio-button">
               <input
                 type="radio"
                 className="modal__radio-input"
                 id="item-radio-hot"
                 name="item-radio"
                 defaultChecked
-              />{" "}
-              Hot
-            </label>
-            <label
-              htmlFor="item-radio-warm"
-              className="modal__label modal__label_type_radio"
-            >
+              />
+              <label
+                htmlFor="item-radio-hot"
+                className="modal__label modal__label_type_radio"
+              >
+                Hot
+              </label>
+            </div>
+            <div className="modal__radio-button">
               <input
                 type="radio"
                 className="modal__radio-input"
                 id="item-radio-warm"
                 name="item-radio"
-              />{" "}
-              Warm
-            </label>
-            <label
-              htmlFor="item-radio-cold"
-              className="modal__label modal__label_type_radio"
-            >
+              />
+              <label
+                htmlFor="item-radio-warm"
+                className="modal__label modal__label_type_radio"
+              >
+                Warm
+              </label>
+            </div>
+            <div className="modal__radio-button">
               <input
                 type="radio"
                 className="modal__radio-input"
                 id="item-radio-cold"
                 name="item-radio"
-              />{" "}
-              Cold
-            </label>
+              />
+              <label
+                htmlFor="item-radio-cold"
+                className="modal__label modal__label_type_radio"
+              >
+                Cold
+              </label>
+            </div>
             <span className="modal__error" id="item-type-error"></span>
           </fieldset>
         </ModalWithForm>
@@ -174,6 +246,9 @@ function App() {
           name="item-detail"
           isOpen={activeModal === "item-detail"}
           onClose={handleCloseModal}
+          image={selectedCard.image}
+          title={selectedCard.title}
+          weather={selectedCard.weather}
         />
       </div>
     </div>
