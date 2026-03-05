@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 32px 0 28px;
+  font-family: "CabinetGroteskBold";
+  font-weight: 700;
+  font-size: 20px;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0%;
+}
+
+.header__logo {
+  width: 89px;
+  height: 40px;
+  margin-right: 24px;
+}
+
+.header__location {
+  margin: 0 0 5px 0;
+}
+
+.header__add-clothes-btn {
+  margin: 0 20px 7px auto;
+  border: 0;
+  font-weight: 700;
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+.header__user-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__user-name {
+  margin: 0;
+}
+
+.header__avatar {
+  width: 40px;
+  height: 40px;
+}

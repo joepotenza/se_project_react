@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
+import {
+  defaultClothingItems,
+  weatherAPIConfig,
+  weatherConditions,
+} from "../../utils/constants.js";
+import WeatherAPI from "../../utils/WeatherAPI.js";
+const weatherAPI = new WeatherAPI(weatherAPIConfig);
+
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+import ItemModal from "../ItemModal/ItemModal";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [weatherData, setWeatherData] = useState({
+    city: "",
+    temp: 999,
+    type: "",
+    day: false,
+    conditionImage: "",
+  });
 
+  useEffect(() => {
+    //When rendering, fetch the weather data
+    weatherAPI
+      .getCurrentWeatherData()
+      .then((data) => {
+        // Process the API data and insert the correct image based on weather condition and time of day
+        const processedData = weatherAPI.processWeatherData(data);
+        const conditions =
+          weatherConditions[processedData.day ? "day" : "night"];
+        const image = conditions[processedData.type]
+          ? conditions[processedData.type]
+          : "";
+        const newData = {
+          ...processedData,
+          ...{
+            conditionImage: image,
+          },
+        };
+        // Update the local variable
+        setWeatherData(newData);
+      })
+      .catch(console.error);
+  }, []);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="page">
+      <div className="page__content">
+        <Header weatherData={weatherData} />
+        <Main weatherData={weatherData} />
+        <Footer />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

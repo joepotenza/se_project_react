@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: "CabinetGrotesk";
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  vertical-align: bottom;
+}
+
+.footer__developer,
+.footer__copyright {
+  margin: auto 0 24px 0;
+}
