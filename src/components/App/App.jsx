@@ -27,6 +27,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function App() {
   const [weatherData, setWeatherData] = useState({
     city: "",
+    condition: "",
     temp: 999,
     type: "",
     isDay: false,

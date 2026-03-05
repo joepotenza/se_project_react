@@ -18,7 +18,11 @@ function Main({
         <ul className="cards__list">
           {clothingItems
             .filter((item) => {
-              return item.weather === weatherData.condition;
+              // default to showing all if condition is never set
+              return (
+                weatherData.condition === "" ||
+                item.weather === weatherData.condition
+              );
             })
             .map((item) => {
               return (
