@@ -7,44 +7,7 @@
   margin: 0 auto;
   padding: 0 20px;
 }
-.modal {
-  visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.3);
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  opacity: 0;
-  transition:
-    visibility 0s linear 0.5s,
-    opacity 0.5s linear;
-}
 
-.modal_is-opened {
-  visibility: visible;
-  opacity: 1;
-  transition-delay: 0s;
-}
-.modal__container {
-  display: flex;
-  flex-direction: column;
-
-  position: relative;
-  border-radius: 20px;
-  background-color: #fff;
-  width: 496px;
-  padding: 28px 28px 36px;
-
-  font-family: "CabinetGroteskBold";
-  font-size: 16px;
-  line-height: 20px;
-}
 .modal__close-btn {
   border: 0;
   background: transparent url(../../images/close_icon.svg) center no-repeat;
@@ -63,9 +26,5 @@
 @media screen and (max-width: 630px) {
   .page__content {
     padding: 0 16px;
-  }
-  .modal {
-    padding-left: 16px;
-    padding-right: 16px;
   }
 }
