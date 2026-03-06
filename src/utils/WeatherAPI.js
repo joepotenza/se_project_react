@@ -29,11 +29,11 @@ export default class WeatherAPI {
   }
 
   // Get simplified "weather condition" type
-  // Possible future addition: Allow for these numbers to change based on location
+  // Possible future addition: Allow for these numbers to change based on location or user preferences
   _getWeatherCondition(temperature) {
-    if (temperature > 86) {
+    if (temperature >= 85) {
       return "hot";
-    } else if (temperature >= 66 && temperature < 86) {
+    } else if (temperature >= 60) {
       return "warm";
     } else {
       return "cold";
