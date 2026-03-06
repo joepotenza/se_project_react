@@ -1,6 +1,6 @@
 # WTWR: What to Wear
 
-WTWR is a React.js application for deciding what to wear based on the weather. It uses the openweathermap.org API to get weather data. Currently it is hard coded to my location (Kissimme, FL) and has very basic clothing options.
+WTWR is a React.js application for deciding what to wear based on the weather. It uses the openweathermap.org API to get weather data. Currently it is hard coded to my location (Kissimmee, FL) and has very basic clothing options.
 
 ## Technologies Used
 
