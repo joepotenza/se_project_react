@@ -9,7 +9,7 @@ export default class WeatherAPI {
     this._url = `https://api.openweathermap.org/data/2.5/weather?lat=${this._lat}&lon=${this._long}&units=imperial&appid=${this._key}`;
   }
 
-  getWeatherType(id) {
+  _getWeatherType(id) {
     /*
     2xx: Thunderstorm
     3xx: Drizzle, 5xx: Rain
@@ -30,7 +30,7 @@ export default class WeatherAPI {
 
   // Get simplified "weather condition" type
   // Possible future addition: Allow for these numbers to change based on location
-  getWeatherCondition(temperature) {
+  _getWeatherCondition(temperature) {
     if (temperature > 86) {
       return "hot";
     } else if (temperature >= 66 && temperature < 86) {
@@ -40,31 +40,36 @@ export default class WeatherAPI {
     }
   }
 
+  _processWeatherData(data) {
+    // get type based on the ID from the API
+    const type = this._getWeatherType(data.weather[0].id);
+    // The api includes an icon that specifies day or night so use that to set the day/night flag
+    const isDay = data.weather[0].icon[data.weather[0].icon.length - 1] === "d";
+    const temp = Math.round(data.main.temp);
+    const celsius = Math.round(((temp - 32) * 5) / 9);
+    return {
+      city: data.name,
+      temp: { F: temp, C: celsius },
+      condition: this._getWeatherCondition(temp),
+      type: type,
+      isDay: isDay,
+    };
+  }
+
   getCurrentWeatherData() {
     return fetch(this._url, {
       method: "GET",
       "Content-Type": "application/json",
-    }).then((res) => {
-      if (res.ok) {
-        // Parse the JSON response on success
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
-  }
-
-  processWeatherData(data) {
-    // get type based on the ID from the API
-    const type = this.getWeatherType(data.weather[0].id);
-    // The api includes an icon that specifies day or night so use that to set the day/night flag
-    const isDay = data.weather[0].icon[data.weather[0].icon.length - 1] === "d";
-    const temp = Math.round(data.main.temp);
-    return {
-      city: data.name,
-      temp: temp,
-      condition: this.getWeatherCondition(temp),
-      type: type,
-      isDay: isDay,
-    };
+    })
+      .then((res) => {
+        if (res.ok) {
+          // Parse the JSON response on success
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .then((data) => {
+        return this._processWeatherData(data);
+      });
   }
 }

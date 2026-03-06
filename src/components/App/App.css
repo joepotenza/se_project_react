@@ -7,6 +7,9 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+a {
+  text-decoration: none;
+}
 
 .modal__close-btn {
   border: 0;

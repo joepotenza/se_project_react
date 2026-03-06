@@ -27,6 +27,7 @@
   align-items: center;
   margin-left: auto;
   position: relative;
+  gap: 20px;
 }
 
 .header__menu-btn {
@@ -36,9 +37,9 @@
 }
 
 .header__add-clothes-btn {
-  margin: 0 20px 0 auto;
+  margin: 0;
+  padding: 0;
   border: 0;
-  font-weight: 700;
   background-color: #f3f3f3;
   cursor: pointer;
 }
@@ -51,6 +52,7 @@
 
 .header__user-name {
   margin: 0;
+  color: #000;
 }
 
 .header__avatar {
@@ -66,28 +68,43 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 768px) {
   .header {
     padding: 18px 0 0 0;
     display: grid;
-    grid-template-columns: [col] auto [col] auto;
+    grid-template-columns: [col] auto [col] auto [col];
     grid-template-rows: [row] auto [row] auto [row];
+    align-items: center;
   }
+
   .header__logo {
     grid-column: col / span 2;
     grid-row: row;
   }
-
   .header__location {
     order: 3;
     margin: 32px 0 16px;
   }
+  .header_page_profile .header__logo {
+    grid-column: 1;
+    grid-row: 1;
+    margin-right: 12px;
+  }
+  .header_page_profile .header__location {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0;
+  }
+
   .header__menu {
     display: none;
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    padding-bottom: 16px;
   }
   .header__add-clothes-btn {
     background-color: #fff;
@@ -100,7 +117,11 @@
     justify-content: center;
     gap: 24px;
     width: 343px;
-    height: 208px;
+    height: 240px;
+    position: absolute;
+    top: 18px;
+    left: 16px;
+    z-index: 2;
   }
   .header__menu-btn {
     margin-left: auto;
@@ -109,10 +130,14 @@
     grid-column: col / span 2;
     grid-row: row;
   }
+  .header_page_profile .header__menu-btn {
+    grid-column: 3;
+    grid-row: 1;
+  }
   .header_menu_open .header__menu-btn,
   .header_menu_open .header__logo,
   .header_menu_open .header__location {
-    display: none;
+    /* display: none;*/
   }
   .header_menu_open .header__menu-close-btn {
     display: block;

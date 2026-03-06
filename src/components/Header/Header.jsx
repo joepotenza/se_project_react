@@ -1,11 +1,18 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import logo from "../../images/logo.png";
 import avatar from "../../images/avatar.png";
 import menuBtn from "../../images/menu_button.png";
 import closeMenuBtn from "../../images/close_icon_black.svg";
 
-function Header({ weatherData, openModalHandler, mobileMenuHandler }) {
+function Header({
+  weatherData,
+  openModalHandler,
+  mobileMenuHandler,
+  isProfilePage,
+}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -21,9 +28,11 @@ function Header({ weatherData, openModalHandler, mobileMenuHandler }) {
   return (
     <>
       <header
-        className={`header ${isMobileMenuOpened ? "header_menu_open" : ""}`}
+        className={`header ${isProfilePage ? "header_page_profile" : ""} ${isMobileMenuOpened ? "header_menu_open" : ""}`}
       >
-        <img src={logo} alt="WTWR Logo" className="header__logo" />
+        <Link to="/" className="header__logo">
+          <img src={logo} alt="WTWR Logo" />
+        </Link>
         <p className="header__location">
           {currentDate}, {weatherData.city}
         </p>
@@ -34,6 +43,7 @@ function Header({ weatherData, openModalHandler, mobileMenuHandler }) {
             className="header__menu-close-btn"
             onClick={toggleMobileMenu}
           />
+          <ToggleSwitch />
           <button
             className="header__add-clothes-btn"
             onClick={openModalHandler}
@@ -41,8 +51,12 @@ function Header({ weatherData, openModalHandler, mobileMenuHandler }) {
             + Add Clothes
           </button>
           <div className="header__user-container">
-            <p className="header__user-name">Terrence Tegegne</p>
-            <img src={avatar} alt="Joe Potenza" className="header__avatar" />
+            <Link to="/profile" className="header__user-name">
+              Terrence Tegegne
+            </Link>
+            <Link to="/profile" className="header__avatar">
+              <img src={avatar} alt="Joe Potenza" />
+            </Link>
           </div>
         </div>
         <img

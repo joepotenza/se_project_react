@@ -1,0 +1,53 @@
+.sidebar {
+}
+
+.sidebar__user-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sidebar__user-name {
+  margin: 0;
+  color: #000;
+  font-family: "CabinetGroteskBold";
+  font-size: 20px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.sidebar__avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.sidebar__user-link {
+  font-family: "CabinetGrotesk";
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 8px;
+  display: none;
+}
+
+@media screen and (max-width: 630px) {
+  .sidebar {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+    width: 100%;
+  }
+  .sidebar__user-container {
+    align-items: start;
+  }
+  .sidebar__user-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar__user-name {
+    margin-bottom: 12px;
+  }
+  .sidebar__user-link {
+    display: block;
+  }
+}

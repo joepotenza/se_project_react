@@ -1,6 +1,8 @@
-import WeatherCard from "../WeatherCard/WeatherCard";
-import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
+import WeatherCard from "../WeatherCard/WeatherCard";
+import { useContext } from "react";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import ClothesSection from "../ClothesSection/ClothesSection";
 
 function Main({
   weatherData,
@@ -8,33 +10,20 @@ function Main({
   clickItemHandler,
   isMobileMenuOpened,
 }) {
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  const currentTemperature = weatherData.temp[currentTemperatureUnit];
   return (
     <main className="main">
-      {isMobileMenuOpened ? <></> : <WeatherCard weatherData={weatherData} />}
-      <section className="cards">
-        <p className="cards__suggestion">
-          Today is {weatherData.temp}&deg; F / You may want to wear:
-        </p>
-        <ul className="cards__list">
-          {clothingItems
-            .filter((item) => {
-              // default to showing all if condition is never set
-              return (
-                weatherData.condition === "" ||
-                item.weather === weatherData.condition
-              );
-            })
-            .map((item) => {
-              return (
-                <ItemCard
-                  key={item._id}
-                  item={item}
-                  onClick={clickItemHandler}
-                />
-              );
-            })}
-        </ul>
-      </section>
+      <WeatherCard weatherData={weatherData} />
+
+      <ClothesSection
+        clothingItems={clothingItems}
+        showSuggestion={true}
+        currentTemperature={currentTemperature}
+        currentTemperatureUnit={currentTemperatureUnit}
+        currentWeatherCondition={weatherData.condition}
+        onClickItem={clickItemHandler}
+      />
     </main>
   );
 }

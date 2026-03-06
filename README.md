@@ -16,7 +16,7 @@ The project can be previewed on Github Pages, located at [https://joepotenza.git
 
 ## Project Design
 
-The project was designed by TripleTen using Figma. [The detailed design can be found here](https://www.figma.com/design/F03bTb81Pw8IDPj5Y9rc5i/Sprint-10-Project--WTWR?node-id=209-98&t=LqNtASN10P9D6Wh4-0).
+The project was designed by TripleTen using Figma. [The detailed design can be found here](https://www.figma.com/design/dQLJwEKasIdspciJAJrCaf/Sprint-11_-WTWR?node-id=311-433&p=f&t=Ip41N5eNQQCCwj96-0).
 
 ## Future Improvements
 
