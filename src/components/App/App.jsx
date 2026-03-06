@@ -86,15 +86,13 @@ function App() {
     }
   }
 
-  // When opening modal form, clear previous cancelled input, hide previous error messages, make sure button state is correct
+  // When opening modal form, hide previous error messages and confirm button state
   function handleOpenNewItemForm() {
     const newItemForm = document.forms["new-item"];
     const newItemName = newItemForm.querySelector("#item-name");
     const newItemImage = newItemForm.querySelector("#item-image");
     const newItemSubmitBtn = newItemForm.querySelector(".modal__submit-btn");
     const inputList = [newItemName, newItemImage];
-
-    newItemForm.reset();
 
     inputList.forEach((inputElement) => {
       const errorElement = newItemForm.querySelector(

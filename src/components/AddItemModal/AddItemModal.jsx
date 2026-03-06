@@ -5,9 +5,13 @@ const AddItemModal = ({ isOpen, onOpen, onClose, onAddItem }) => {
   const defaultValues = {
     name: "",
     link: "",
-    weather: "hot",
+    weather: "",
   };
   const { values, handleChange, setValues } = useForm(defaultValues);
+  const handleOpen = () => {
+    handleReset();
+    onOpen();
+  };
   const handleReset = () => {
     setValues(defaultValues);
   };
@@ -21,7 +25,7 @@ const AddItemModal = ({ isOpen, onOpen, onClose, onAddItem }) => {
       title="New garment"
       buttonText="Add garment"
       isOpen={isOpen}
-      onOpen={onOpen}
+      onOpen={handleOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
@@ -64,6 +68,7 @@ const AddItemModal = ({ isOpen, onOpen, onClose, onAddItem }) => {
             value="hot"
             checked={values.weather === "hot"}
             onChange={handleChange}
+            required
           />
           <label
             htmlFor="item-radio-hot"
