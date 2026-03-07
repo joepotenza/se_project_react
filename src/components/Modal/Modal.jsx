@@ -2,13 +2,29 @@
 import { useEffect } from "react";
 import "./Modal.css";
 
-function Modal({ name, isOpen, onClose, onSubmit, onOpen, children }) {
+function Modal({ name, isOpen, onClose, onOpen, children }) {
   // Allow for a handler to execute when the modal is opened (for form validation)
   useEffect(() => {
-    if (isOpen && onOpen) {
-      onOpen();
+    if (isOpen) {
+      if (typeof onOpen === "function") {
+        onOpen();
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, onOpen]);
+
+  // Close modal when Escape is pressed
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (evt) => {
+      if (evt.key === "Escape") {
+        onClose(evt);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   function handleModalClick(evt) {
     // Close the active modal when clicking on the overlay (outside the modal borders)

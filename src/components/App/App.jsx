@@ -4,14 +4,6 @@ import "./App.css";
 
 import { weatherAPIConfig, weatherConditions } from "../../utils/constants.js";
 
-import {
-  enableValidation,
-  toggleButtonState,
-  hideInputError,
-  checkInputValidity,
-  validationSettings,
-} from "../../utils/validation.js";
-
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 import WeatherAPI from "../../utils/WeatherAPI.js";
@@ -57,7 +49,6 @@ function App() {
   // Handler to display "new garment" modal
   function handleOpenModalWithForm(evt) {
     setActiveModal("new-item");
-    document.addEventListener("keydown", closeModalWithEscapeKey);
   }
 
   // Handler to display "item detail" modal
@@ -69,47 +60,12 @@ function App() {
     const title = card.querySelector(".card__name").textContent;
     const weather = `Weather: ${card.querySelector(".card__weather").textContent}`;
     setSelectedCard({ _id, image, title, weather });
-    document.addEventListener("keydown", closeModalWithEscapeKey);
   }
 
   // Handler to close any active modal
   function handleCloseModal(evt) {
     setActiveModal("");
     setSelectedCard(emptyCard);
-    document.removeEventListener("keydown", closeModalWithEscapeKey);
-  }
-
-  // Close active modal when Escape key is pressed
-  function closeModalWithEscapeKey(evt) {
-    if (evt.key == "Escape") {
-      handleCloseModal(evt);
-    }
-  }
-
-  // When opening modal form, hide previous error messages and confirm button state
-  function handleOpenNewItemForm() {
-    const newItemForm = document.forms["new-item"];
-    const newItemName = newItemForm.querySelector("#item-name");
-    const newItemImage = newItemForm.querySelector("#item-image");
-    const newItemSubmitBtn = newItemForm.querySelector(".modal__submit-btn");
-    const inputList = [newItemName, newItemImage];
-
-    inputList.forEach((inputElement) => {
-      const errorElement = newItemForm.querySelector(
-        `#${inputElement.id}-error`,
-      );
-      hideInputError(
-        inputElement,
-        errorElement,
-        validationSettings.errorClass,
-        validationSettings.errorElementClass,
-      );
-    });
-    toggleButtonState(
-      inputList,
-      newItemSubmitBtn,
-      validationSettings.inactiveButtonClass,
-    );
   }
 
   // Add item to clothing array.
@@ -175,8 +131,6 @@ function App() {
       .getClothingItems()
       .then(setClothingItems)
       .catch(console.error);
-
-    enableValidation(validationSettings);
   }, []);
 
   return (
@@ -217,7 +171,6 @@ function App() {
           <Footer />
           <AddItemModal
             isOpen={activeModal === "new-item"}
-            onOpen={handleOpenNewItemForm}
             onClose={handleCloseModal}
             onAddItem={handleAddItemSubmit}
           ></AddItemModal>

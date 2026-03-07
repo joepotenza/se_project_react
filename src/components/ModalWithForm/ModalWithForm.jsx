@@ -22,12 +22,9 @@ function ModalWithForm({
       <div className="modal__header">
         <h2 className="modal__title">{title}</h2>
       </div>
-      <form className="modal__form" name={name} onSubmit={onSubmit}>
+      <form className="modal__form" name={name} onSubmit={onSubmit} noValidate>
         {children}
-        <button
-          className="modal__submit-btn modal__submit-btn_disabled"
-          type="submit"
-        >
+        <button className="modal__submit-btn" type="submit">
           {buttonText}
         </button>
       </form>
