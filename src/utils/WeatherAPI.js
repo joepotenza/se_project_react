@@ -6,7 +6,10 @@ export default class WeatherAPI {
     this._key = key;
     this._lat = lat;
     this._long = long;
-    this._url = `https://api.openweathermap.org/data/2.5/weather?lat=${this._lat}&lon=${this._long}&units=imperial&appid=${this._key}`;
+  }
+
+  _buildUrl(lat, long) {
+    return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${this._key}`;
   }
 
   _getWeatherType(id) {
@@ -56,10 +59,12 @@ export default class WeatherAPI {
     };
   }
 
-  getCurrentWeatherData() {
-    return fetch(this._url, {
+  getCurrentWeatherData(lat, long) {
+    const useLat = typeof lat === "number" ? lat : this._lat;
+    const useLong = typeof long === "number" ? long : this._long;
+    const url = this._buildUrl(useLat, useLong);
+    return fetch(url, {
       method: "GET",
-      "Content-Type": "application/json",
     })
       .then((res) => {
         if (res.ok) {

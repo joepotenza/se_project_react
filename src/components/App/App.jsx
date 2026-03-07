@@ -114,22 +114,40 @@ function App() {
   };
 
   useEffect(() => {
-    // Fetch the weather data
-    weatherAPI
-      .getCurrentWeatherData()
-      .then((data) => {
-        // figure out which background image to show with weather data
-        const imageList = weatherConditions[data.isDay ? "day" : "night"];
-        const newData = {
-          ...data,
-          ...{
-            conditionImage: imageList[data.type] ? imageList[data.type] : "",
-          },
-        };
-        // Update the local variable
-        setWeatherData(newData);
-      })
-      .catch(console.error);
+    const fetchWeather = (lat, long) => {
+      weatherAPI
+        .getCurrentWeatherData(lat, long)
+        .then((data) => {
+          // figure out which background image to show with weather data
+          const imageList = weatherConditions[data.isDay ? "day" : "night"];
+          const newData = {
+            ...data,
+            ...{
+              conditionImage: imageList[data.type] ? imageList[data.type] : "",
+            },
+          };
+          // Update the local variable
+          setWeatherData(newData);
+        })
+        .catch(console.error);
+    };
+
+    // Fetch the weather data via browser geolocation
+    if (!navigator.geolocation) {
+      console.error("Geolocation is not supported by this browser");
+      fetchWeather();
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchWeather(latitude, longitude);
+        },
+        (error) => {
+          console.error(`Error getting geolocation: ${error.message}`);
+          fetchWeather();
+        },
+      );
+    }
 
     // Get clothing items
     clothingItemAPI
