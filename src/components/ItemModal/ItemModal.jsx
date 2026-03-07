@@ -3,7 +3,7 @@ import Modal from "../Modal/Modal";
 
 function ItemModal({
   name,
-  image,
+  imageUrl,
   title,
   weather,
   isOpen,
@@ -19,17 +19,21 @@ function ItemModal({
       ></button>
       <div className="modal__item-container">
         <div className="modal__image-container">
-          <img
-            className="modal__image"
-            src={image}
-            alt={title}
-            width="325"
-          ></img>
+          {imageUrl !== "" ? (
+            <img
+              className="modal__image"
+              src={imageUrl}
+              alt={title}
+              width="325"
+            ></img>
+          ) : (
+            ""
+          )}
         </div>
         <div className="modal__item-content">
           <div className="modal__item-details">
             <h2 className="modal__card-name">{title}</h2>
-            <div className="modal__item-text">{weather}</div>
+            <div className="modal__item-text">Weather: {weather}</div>
           </div>
           <button
             className="modal__item-delete-btn"

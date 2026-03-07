@@ -1,7 +1,12 @@
 import "./DeleteItemModal.css";
 import Modal from "../Modal/Modal";
 
-function DeleteItemModal({ isOpen, onClose, confirmDeleteHandler }) {
+function DeleteItemModal({
+  isOpen,
+  onClose,
+  confirmDeleteHandler,
+  cancelDeleteHandler,
+}) {
   return (
     <Modal name="delete" isOpen={isOpen} onClose={onClose}>
       <button
@@ -24,7 +29,7 @@ function DeleteItemModal({ isOpen, onClose, confirmDeleteHandler }) {
         <button
           className="modal__delete-cancel"
           type="button"
-          onClick={onClose}
+          onClick={cancelDeleteHandler}
         >
           Cancel
         </button>

@@ -28,8 +28,8 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 function App() {
   const emptyCard = {
     _id: "",
-    image: "",
-    title: "",
+    imageUrl: "",
+    name: "",
     weather: "",
   };
   const [weatherData, setWeatherData] = useState({
@@ -52,20 +52,20 @@ function App() {
   }
 
   // Handler to display "item detail" modal
-  function handleOpenItemModal(evt) {
+  function handleOpenItemModal(item) {
     setActiveModal("item-detail");
-    const card = evt.target.closest(".card");
-    const _id = parseInt(card.getAttribute("item-id"));
-    const image = card.querySelector(".card__image").src;
-    const title = card.querySelector(".card__name").textContent;
-    const weather = `Weather: ${card.querySelector(".card__weather").textContent}`;
-    setSelectedCard({ _id, image, title, weather });
+    setSelectedCard(item);
   }
 
   // Handler to close any active modal
   function handleCloseModal(evt) {
     setActiveModal("");
-    setSelectedCard(emptyCard);
+    //setSelectedCard(emptyCard);
+    /*
+    TBD: whether to reset selected card on modal close or not, since it doesn't cause any issues with current implementation
+    and allows for smoother UX when going from item detail modal to delete confirmation modal or closing modal
+    because setting it to empty results in a brief flash of empty content
+    */
   }
 
   // Add item to clothing array.
@@ -94,8 +94,13 @@ function App() {
           }),
         );
         handleCloseModal();
+        setSelectedCard(emptyCard); // reset selected card after delete since we don't reset it by default on modal close
       })
       .catch(console.error);
+  }
+  function handleCancelDeleteItem() {
+    setSelectedCard(emptyCard); // reset selected card after cancel since we don't reset it by default on modal close
+    handleCloseModal();
   }
 
   // Track opening/closing mobile menu, since WeatherCard is located in Main and not Header
@@ -179,8 +184,8 @@ function App() {
             name="item-detail"
             isOpen={activeModal === "item-detail"}
             onClose={handleCloseModal}
-            image={selectedCard.image}
-            title={selectedCard.title}
+            imageUrl={selectedCard.imageUrl}
+            title={selectedCard.name}
             weather={selectedCard.weather}
             clickDeleteHandler={handleDeleteItem}
           />
@@ -189,6 +194,7 @@ function App() {
             isOpen={activeModal === "delete"}
             onClose={handleCloseModal}
             confirmDeleteHandler={handleConfirmDeleteItem}
+            cancelDeleteHandler={handleCancelDeleteItem}
           />
         </div>
       </div>
