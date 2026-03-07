@@ -30,11 +30,11 @@ export default class Api {
   }
 
   // Add a new item
-  addClothingItem({ name, link, weather }) {
+  addClothingItem({ name, imageUrl, weather }) {
     return this._makeAPICall({
       endpoint: "/items",
       method: "POST",
-      body: JSON.stringify({ name, link, weather }),
+      body: JSON.stringify({ name, imageUrl, weather }),
     });
   }
 

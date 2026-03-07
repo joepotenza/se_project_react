@@ -117,7 +117,7 @@ function App() {
     clothingItemAPI
       .addClothingItem(data)
       .then((newItem) => {
-        setClothingItems([...clothingItems, newItem]);
+        setClothingItems((prev) => [newItem, ...prev]);
         handleCloseModal();
         afterSubmit();
       })
