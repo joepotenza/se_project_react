@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import logo from "../../images/logo.png";
-import avatar from "../../images/avatar.png";
 import menuBtn from "../../images/menu_button.png";
 import closeMenuBtn from "../../images/close_icon_black.svg";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 function Header({
   weatherData,
   openModalHandler,
-  mobileMenuHandler,
   isProfilePage,
+  signupHandler,
+  loginHandler,
 }) {
+  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -22,7 +26,15 @@ function Header({
 
   function toggleMobileMenu() {
     setIsMobileMenuOpened(!isMobileMenuOpened);
-    mobileMenuHandler(!isMobileMenuOpened);
+  }
+
+  function handleSignupButton(evt) {
+    setIsMobileMenuOpened(false);
+    signupHandler(evt);
+  }
+  function handleLoginButton(evt) {
+    setIsMobileMenuOpened(false);
+    loginHandler(evt);
   }
 
   return (
@@ -43,16 +55,42 @@ function Header({
           onClick={toggleMobileMenu}
         />
         <ToggleSwitch />
-        <button className="header__add-clothes-btn" onClick={openModalHandler}>
-          + Add Clothes
-        </button>
+        {isLoggedIn ? (
+          <button
+            className="header__add-clothes-btn"
+            onClick={openModalHandler}
+          >
+            + Add Clothes
+          </button>
+        ) : (
+          ""
+        )}
         <div className="header__user-container">
-          <Link to="/profile" className="header__user-name">
-            Terrence Tegegne
-          </Link>
-          <Link to="/profile" className="header__avatar">
-            <img src={avatar} alt="Joe Potenza" />
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <Link to="/profile" className="header__user-name">
+                {currentUser.name}
+              </Link>
+              <Link to="/profile" className="header__avatar">
+                <UserAvatar />
+              </Link>
+            </>
+          ) : (
+            <>
+              <button
+                className="header__user-signup"
+                onClick={handleSignupButton}
+              >
+                Sign Up
+              </button>
+              <button
+                className="header__user-login"
+                onClick={handleLoginButton}
+              >
+                Log In
+              </button>
+            </>
+          )}
         </div>
       </div>
       <img

@@ -8,10 +8,11 @@ function Main({
   weatherData,
   clothingItems,
   clickItemHandler,
-  isMobileMenuOpened,
+  clickItemLikeHandler,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const currentTemperature = weatherData.temp[currentTemperatureUnit];
+
   return (
     <main className="main">
       <WeatherCard weatherData={weatherData} />
@@ -23,6 +24,7 @@ function Main({
         currentTemperatureUnit={currentTemperatureUnit}
         currentWeatherCondition={weatherData.condition}
         onClickItem={clickItemHandler}
+        onCardLike={clickItemLikeHandler}
       />
     </main>
   );

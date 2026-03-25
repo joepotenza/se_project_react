@@ -1,16 +1,47 @@
 import "./SideBar.css";
-import avatar from "../../images/avatar.png";
+import { useContext } from "react";
+import UserAvatar from "../UserAvatar/UserAvatar";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function SideBar() {
+function SideBar({ clickEditProfileHandler, clickLogoutHandler }) {
+  const { currentUser } = useContext(CurrentUserContext);
   return (
     <aside className="sidebar">
       <div className="sidebar__user-container">
-        <img src={avatar} alt="Terrence Tegegne" className="sidebar__avatar" />
-        <div className="sidebar__user-content">
-          <p className="sidebar__user-name">Terrence Tegegne</p>
-          <p className="sidebar__user-link">Change profile data</p>
-          <p className="sidebar__user-link">Logout</p>
+        <div className="sidebar__avatar">
+          <UserAvatar avatarClass="sidebar" />
         </div>
+        <div className="sidebar__user-content">
+          <p className="sidebar__user-name">{currentUser.name}</p>
+          <div className="sidebar__buttons sidebar__buttons_type_inline">
+            <button
+              className="sidebar__button sidebar__button_type_profile"
+              onClick={clickEditProfileHandler}
+            >
+              Change profile data
+            </button>
+            <button
+              className="sidebar__button sidebar__button_type_logout"
+              onClick={clickLogoutHandler}
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="sidebar__buttons sidebar__buttons_type_below">
+        <button
+          className="sidebar__button sidebar__button_type_profile"
+          onClick={clickEditProfileHandler}
+        >
+          Change profile data
+        </button>
+        <button
+          className="sidebar__button sidebar__button_type_logout"
+          onClick={clickLogoutHandler}
+        >
+          Logout
+        </button>
       </div>
     </aside>
   );

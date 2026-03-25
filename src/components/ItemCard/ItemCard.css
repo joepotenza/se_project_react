@@ -7,13 +7,19 @@
   position: relative;
   display: flex;
   justify-content: center;
-  cursor: pointer;
   overflow: hidden;
 }
 
-.card__name {
+.card__header {
   position: absolute;
   top: 15px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-items: center;
+}
+
+.card__name {
   padding: 2px 12px;
   margin: 0;
   background-color: #fff;
@@ -22,18 +28,44 @@
   font-family: "CabinetGroteskBold";
   font-size: 16px;
   line-height: 20px;
+  cursor: pointer;
 }
 
 .card__image {
   width: 100%;
+  cursor: pointer;
 }
+
+.card__like-btn {
+  border: 0;
+  background-color: transparent;
+  background-image: url(../../images/like_icon_default.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  padding: 0;
+  width: 18px;
+  height: 15px;
+}
+
+/*.card__like-btn:hover {
+  background-image: url(../../images/like_icon_liked.png);
+}*/
+
+.card__like-btn_liked {
+  background-image: url(../../images/like_icon_liked.png);
+}
+
+/*.card__like-btn_liked:hover {
+  background-image: url(../../images/like_icon_default.png);
+}*/
 
 @media screen and (max-width: 630px) {
   .card {
     width: 162px;
     height: 162px;
   }
-  .card__name {
+  .card__header {
     top: 7px;
   }
 }

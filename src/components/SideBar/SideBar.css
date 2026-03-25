@@ -1,4 +1,7 @@
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .sidebar__user-container {
@@ -21,13 +24,59 @@
   height: 40px;
 }
 
-.sidebar__user-link {
-  font-family: "CabinetGrotesk";
+.sidebar__avatar,
+.sidebar__avatar-image {
+  width: 40px;
+  height: 40px;
+}
+
+.sidebar__avatar,
+.sidebar__avatar:visited {
+  color: rgba(255, 255, 255, 1);
+}
+
+.sidebar__avatar-default {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  text-align: center;
+  font-family: "CabinetGroteskBold";
   font-size: 20px;
   line-height: 24px;
-  color: rgba(0, 0, 0, 0.6);
-  margin: 0 0 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar__buttons {
+  font-family: "CabinetGroteskBold";
+  font-size: 20px;
+  line-height: 100%;
+  color: rgba(0, 0, 0, 1);
+  font-weight: bold;
+  width: 171px;
+  /*margin: 0 0 8px;
+  display: none;*/
+}
+
+.sidebar__buttons_type_below {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar__buttons_type_inline {
   display: none;
+}
+
+.sidebar__button {
+  border: 0;
+  background-color: #f3f3f3;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 630px) {
@@ -47,7 +96,18 @@
   .sidebar__user-name {
     margin-bottom: 12px;
   }
-  .sidebar__user-link {
-    display: block;
+  .sidebar__buttons {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .sidebar__buttons_type_below {
+    display: none;
+  }
+
+  .sidebar__buttons_type_inline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: "CabinetGrotesk";
+    font-weight: normal;
   }
 }

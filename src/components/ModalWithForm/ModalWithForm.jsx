@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./ModalWithForm.css";
 import Modal from "../Modal/Modal";
 
@@ -11,6 +10,8 @@ function ModalWithForm({
   onSubmit,
   onOpen,
   children,
+  signupHandler,
+  loginHandler,
 }) {
   return (
     <Modal name={name} isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
@@ -24,9 +25,31 @@ function ModalWithForm({
       </div>
       <form className="modal__form" name={name} onSubmit={onSubmit} noValidate>
         {children}
-        <button className="modal__submit-btn" type="submit">
+        <button
+          className={`modal__submit-btn modal__submit-btn-type_${name}`}
+          type="submit"
+        >
           {buttonText}
         </button>
+        {name === "user-login" ? (
+          <button
+            className="modal__signup-btn"
+            type="button"
+            onClick={signupHandler}
+          >
+            or Sign Up
+          </button>
+        ) : name === "user-signup" ? (
+          <button
+            className="modal__signup-btn"
+            type="button"
+            onClick={loginHandler}
+          >
+            or Log In
+          </button>
+        ) : (
+          ""
+        )}
       </form>
     </Modal>
   );

@@ -1,5 +1,7 @@
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function ClothesSection({
   showSuggestion,
@@ -10,7 +12,10 @@ function ClothesSection({
   currentWeatherCondition,
   onClickItem,
   onClickAddLink,
+  onCardLike,
 }) {
+  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
+
   return (
     <section className="cards">
       {showSuggestion ? (
@@ -44,15 +49,24 @@ function ClothesSection({
       <ul className="cards__list">
         {clothingItems
           .filter((item) => {
-            // default to showing all if condition is never set
+            // Filter by owner for current user Id only when on profile page
             return (
-              currentWeatherCondition === "" ||
-              item.weather === currentWeatherCondition
+              (!showAddLink || currentUser._id === item.owner) &&
+              (currentWeatherCondition === "" ||
+                item.weather === currentWeatherCondition)
             );
           })
           .map((item) => {
+            const isLiked = item.likes.some((id) => id === currentUser._id);
             return (
-              <ItemCard key={item._id} item={item} onClick={onClickItem} />
+              <ItemCard
+                key={item._id}
+                item={item}
+                onClick={onClickItem}
+                onCardLike={onCardLike}
+                showLikeButton={isLoggedIn}
+                isLiked={isLiked}
+              />
             );
           })}
       </ul>

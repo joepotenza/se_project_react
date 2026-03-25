@@ -24,4 +24,6 @@ const weatherAPIConfig = {
   long: -81.43602167606302,
 };
 
-export { weatherAPIConfig, weatherConditions };
+const TOKEN_KEY = "jwt";
+
+export { weatherAPIConfig, weatherConditions, TOKEN_KEY };

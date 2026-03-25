@@ -33,7 +33,7 @@ const AddItemModal = ({ isOpen, onOpen, onClose, onAddItem }) => {
     return errors;
   };
 
-  const { values, handleChange, errors, isSubmitted, resetForm, handleSubmit } =
+  const { values, handleChange, errors, resetForm, handleSubmit } =
     useFormWithValidation(defaultValues, validate);
 
   const handleFormSubmit = (evt) => {
