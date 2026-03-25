@@ -1,6 +1,7 @@
 /*
   API for openweathermap.org
 */
+import { checkResponse } from "./constants.js";
 export default class WeatherAPI {
   constructor({ key, lat, long }) {
     this._key = key;
@@ -66,13 +67,7 @@ export default class WeatherAPI {
     return fetch(url, {
       method: "GET",
     })
-      .then((res) => {
-        if (res.ok) {
-          // Parse the JSON response on success
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
+      .then(checkResponse)
       .then((data) => {
         return this._processWeatherData(data);
       });

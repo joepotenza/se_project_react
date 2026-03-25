@@ -1,3 +1,5 @@
+import { checkResponse } from "./constants.js";
+
 export default class AuthApi {
   constructor({ baseUrl, headers }) {
     // constructor body
@@ -20,13 +22,7 @@ export default class AuthApi {
     if (this._token !== "" && requireToken) {
       params.headers.authorization = `Bearer ${this._token}`;
     }
-    return fetch(`${this._baseUrl}${endpoint}`, params).then((res) => {
-      if (res.ok) {
-        // Parse the JSON response on success
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return fetch(`${this._baseUrl}${endpoint}`, params).then(checkResponse);
   }
 
   // Set User Token for any API calls

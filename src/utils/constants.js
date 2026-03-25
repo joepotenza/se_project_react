@@ -26,4 +26,11 @@ const weatherAPIConfig = {
 
 const TOKEN_KEY = "jwt";
 
-export { weatherAPIConfig, weatherConditions, TOKEN_KEY };
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Error: ${res.status}`);
+}
+
+export { weatherAPIConfig, weatherConditions, TOKEN_KEY, checkResponse };
