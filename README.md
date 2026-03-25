@@ -10,6 +10,10 @@ WTWR is a React.js application for deciding what to wear based on the weather. I
 - Flexbox and grid layout
 - Responsive design
 
+## Back-End
+
+The Back-End code can be found at [https://github.com/joepotenza/se_project_express](https://github.com/joepotenza/se_project_express).
+
 ## Project Preview
 
 The project can be previewed on Github Pages, located at [https://joepotenza.github.io/se_project_react](https://joepotenza.github.io/se_project_react). **Currently this shows a previous version of the application** due to the implementation of a "dummy" JSON backend. This will be fixed in the next update when the site is moved to Google Code.
@@ -18,7 +22,7 @@ The project can be previewed on Github Pages, located at [https://joepotenza.git
 
 ## Project Design
 
-The project was designed by TripleTen using Figma. [The detailed design can be found here](https://www.figma.com/design/dQLJwEKasIdspciJAJrCaf/Sprint-11_-WTWR?node-id=311-433&p=f&t=Ip41N5eNQQCCwj96-0).
+The project was designed by TripleTen using Figma. [The detailed design can be found here](https://www.figma.com/design/bfVOvqlLmoKZ5lpro8WWBe/Sprint-14_-WTWR?node-id=0-1&p=f&t=ZCjTdghyjJbRmiJT-0).
 
 ## Future Improvements
 
