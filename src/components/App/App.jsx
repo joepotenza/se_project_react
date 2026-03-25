@@ -395,7 +395,7 @@ function App() {
               imageUrl={selectedCard.imageUrl}
               title={selectedCard.name}
               weather={selectedCard.weather}
-              isOwn={selectedCard.owner === currentUser._id}
+              owner={selectedCard.owner}
               clickDeleteHandler={handleDeleteItem}
             />
 
