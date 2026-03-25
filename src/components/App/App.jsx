@@ -51,9 +51,7 @@ function App() {
     imageUrl: "",
     name: "",
     weather: "",
-    owner: {
-      _id: "",
-    },
+    owner: "",
   };
   const [weatherData, setWeatherData] = useState({
     city: "",
@@ -165,8 +163,11 @@ function App() {
       .editUserProfile(data)
       .then((user) => {
         // User profile updated
-        currentUser.name = user.name;
-        currentUser.avatar = user.avatar;
+        setCurrentUser((prev) => ({
+          ...prev,
+          name: user.name,
+          avatar: user.avatar,
+        }));
         handleCloseModal();
         afterSubmit();
       })
