@@ -39,9 +39,9 @@ const EditProfileModal = ({ isOpen, onOpen, onClose, onEditProfile }) => {
 
   useEffect(() => {
     if (isOpen) {
-      resetForm();
+      resetForm({ name: currentUser.name, avatar: currentUser.avatar });
     }
-  }, [isOpen]);
+  }, [isOpen, currentUser]);
 
   return (
     <ModalWithForm
