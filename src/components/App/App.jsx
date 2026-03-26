@@ -67,6 +67,7 @@ function App() {
     email: "",
     avatar: "",
   };
+  const location = useLocation();
   const [clothingItems, setClothingItems] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [activeModal, setActiveModal] = useState("");
@@ -328,7 +329,7 @@ function App() {
               openModalHandler={handleOpenModalWithForm}
               signupHandler={handleOpenRegistrationModal}
               loginHandler={handleOpenLoginModal}
-              isProfilePage={useLocation().pathname === "/profile"}
+              isProfilePage={location.pathname === "/profile"}
             />
             <Routes>
               <Route
