@@ -17,7 +17,7 @@ The Back-End code can be found at [https://github.com/joepotenza/se_project_expr
 
 ## Project Preview
 
-The project can be previewed at [https://www.wtwr-jpotenza.joe.dj/](https://www.wtwr-jpotenza.joe.dj/)
+The project can be previewed at [https://wtwr.bigjoepo.com/](https://wtwr.bigjoepo.com/)
 
 The video below is not up to date but a new walkthrough will be recorded once the project is complete.
 
