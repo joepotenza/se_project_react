@@ -14,24 +14,21 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import WeatherAPI from "../../utils/WeatherAPI.js";
 const weatherAPI = new WeatherAPI(weatherAPIConfig);
 
-/**
- * Note: This was all in one api file to avoid duplicate code but Sprint 14 calls for a separate auth.js for auth functions
- */
-import ItemApi from "../../utils/Api.js";
-const itemApi = new ItemApi({
-  baseUrl: "http://localhost:3001",
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr.bigjoepo.com"
+    : "http://localhost:3001";
+const apiOptions = {
+  baseUrl,
   headers: {
     "Content-Type": "application/json",
   },
-});
+};
+import ItemApi from "../../utils/Api.js";
+const itemApi = new ItemApi(apiOptions);
 
 import AuthApi from "../../utils/auth.js";
-const authApi = new AuthApi({
-  baseUrl: "http://localhost:3001",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+const authApi = new AuthApi(apiOptions);
 
 import Header from "../Header/Header";
 import Main from "../Main/Main";
