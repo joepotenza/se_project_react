@@ -13,11 +13,11 @@ WTWR is a React.js application for deciding what to wear based on the weather. I
 
 ## Back-End
 
-The Back-End code can be found at [https://github.com/joepotenza/se_project_express](https://github.com/joepotenza/se_project_express).
+The Back-End code can be found at [https://github.com/joepotenza/se_project_express](https://github.com/joepotenza/se_project_express)
 
 ## Project Preview
 
-The project can be previewed on Github Pages, located at [https://joepotenza.github.io/se_project_react](https://joepotenza.github.io/se_project_react). **Currently this shows a previous version of the application** due to the implementation of a "dummy" JSON backend. This will be fixed in the final update when the site is moved to Google Code.
+The project can be previewed at [https://www.wtwr-jpotenza.joe.dj/](https://www.wtwr-jpotenza.joe.dj/)
 
 The video below is not up to date but a new walkthrough will be recorded once the project is complete.
 
