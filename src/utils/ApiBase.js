@@ -29,4 +29,8 @@ export default class ApiBase {
 
     return fetch(`${this._baseUrl}${endpoint}`, params).then(checkResponse);
   }
+  // Set User Token for any API calls
+  setUserToken(token) {
+    this._token = token;
+  }
 }

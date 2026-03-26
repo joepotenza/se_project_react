@@ -1,11 +1,6 @@
 import ApiBase from "./ApiBase.js";
 
 export default class ItemApi extends ApiBase {
-  // Set User Token for any API calls
-  setUserToken(token) {
-    this._token = token;
-  }
-
   // Load the clothing items from the API
   getClothingItems() {
     return this._makeAPICall({ endpoint: "/items" });

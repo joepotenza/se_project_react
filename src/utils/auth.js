@@ -1,11 +1,6 @@
 import ApiBase from "./ApiBase.js";
 
 export default class AuthApi extends ApiBase {
-  // Set User Token for any API calls
-  setUserToken(token) {
-    this._token = token;
-  }
-
   // User Signup
   registerUser({ name, avatar, email, password }) {
     return this._makeAPICall({
